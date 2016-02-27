@@ -6,7 +6,7 @@ chrome.contextMenus.create({
 
 function onClickInsertHandler(info) {
     
-    
+    // Need to send a message with the voucher code 
 	
 }
 
