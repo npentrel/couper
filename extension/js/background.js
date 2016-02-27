@@ -5,7 +5,11 @@ chrome.contextMenus.create({
 });
 
 function onClickInsertHandler(info) {
-    alert("Hello, World")
+    
+	var elems = document.getElementsByTagName('input');
+	for(var i=0; i< elems.length; i++) {
+		alert(elems[i].type);
+	}
 }
 
 chrome.contextMenus.create({
