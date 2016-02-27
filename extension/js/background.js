@@ -40,7 +40,16 @@ function onClickInsertHandler(info) {
 			console.log("Voucher url: " + voucherURL);
 			
 			// Loading all the remote voucher codes.			
-			selectedVoucherCode = loadTextFileAjaxSync(voucherURL, "application/json");
+			var jsonString = loadTextFileAjaxSync(voucherURL, "application/json");
+			// Parsing json
+			var jsonObject = JSON.parse(jsonString);
+			
+			// Using for...in to get the first object.
+			for (var key in jsonObject) {
+				selectedVoucherCode = key;
+				break;
+			}
+			//selectedVoucherCode = jsonObject.NEWSTYLE16;
 			
 			chrome.tabs.sendMessage(tabs[0].id, {voucherCode: selectedVoucherCode}, function(response) {
 				console.log(response.farewell);
