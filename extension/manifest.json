@@ -2,6 +2,7 @@
   "name": "Couper",
   "version": "1.0",
   "manifest_version": 3,
+  "options_page": "options.html",
   "description": "The best online voucher codes!",
   "browser_action": {
     "default_icon": {

@@ -3,6 +3,7 @@ import requests
 import re
 from html.parser import HTMLParser
 import bs4
+import json
 app = Flask(__name__)
 
 
@@ -16,32 +17,73 @@ def my_voucher_codes(company):
     response = requests.get('http://www.myvouchercodes.co.uk/s?q=' + company)
     soup = bs4.BeautifulSoup(response.text, "html.parser")
     
-    codes = []
+    codes = {}
     for p in soup.findAll('div'):
-	    code = p.find('div', {'class':'Offer-code'})
-	    if code:
-	        if code.text not in codes: 
-		        codes.append(code.text)
+        code = p.find('div', {'class':'Offer-code'})
+        title = p.find('h3', {'class':'Offer-title'})
+        if code:
+            if title:
+                codes[code.text] = title.text
+    
+    # for c in codes:
+    #     print (c, codes[c])
 
-    print (codes)
-    return ' '.join(codes)
+    return codes
+
 
 # e.g. http://127.0.0.1:5000/hotukdeals/boots
 @app.route('/hotukdeals/<string:company>')
 def hotukdeals(company):
     response = requests.get('http://www.hotukdeals.com/vouchers/' + company)
     soup = bs4.BeautifulSoup(response.text, "html.parser")
-    codes = []
+    codes = {}
     for p in soup.findAll('div'):
-	    code = p.find('input', {'class':'voucherReveal-peel-bottom-code'})
-	    if code:
-	        if code.attrs["value"] not in codes: 
-		        codes.append(code.attrs["value"])
+        title = p.find('h2', {'class':'thread-title-text voucherbox-thread-title-text hd--inline'})
+        code = p.find('input', {'class':'voucherReveal-peel-bottom-code'})
+        if code:
+            if title:
+                if code.attrs["value"] not in codes:
+                    codes[code.attrs["value"]] = title.text
 
-    print (codes)
-    return ' '.join(codes)
+    # for c in codes:
+    #     print (c, codes[c])
+
+    return codes
 
 
+@app.route('/<string:company>')
+def allvouchers(company):
+    c1 = hotukdeals(company)
+    c2 = my_voucher_codes(company)
+
+    codeslikely = {}
+    codesother = {}
+
+    for c in c1:
+        if c in c2:
+            codeslikely[c] = c1[c]
+        else:
+            codesother[c] = c1[c]
+
+    for c in c2:
+        if c not in codeslikely:
+            codesother[c] = c2[c]
+
+    print ("likely codes: ", codeslikely)
+    codesall = codeslikely
+    for c in codesother:
+        if c not in codeslikely:
+            codesall[c] = codesother[c]
+    print("")
+
+    print ("all codes: ", codesall)
+    print("")
+
+    output = json.dumps(codesall, ensure_ascii=False)
+
+    print (output)
+
+    return output
 
 if __name__ == '__main__':
     app.run()
