@@ -1,5 +1,5 @@
 # couper
-Coupon magic.
+The best online voucher codes!
 
 Chrome extention
 ================

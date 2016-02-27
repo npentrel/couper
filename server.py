@@ -75,7 +75,9 @@ def allvouchers(company):
     codesall = codeslikely
     for c in codesother:
         if c not in codeslikely:
-            codesall[c] = codesother[c]
+            if "see " not in c:
+                if "See" not in c:
+                    codesall[c] = codesother[c]
     print("")
 
     print ("all codes: ", codesall)
