@@ -5,14 +5,20 @@ from html.parser import HTMLParser
 import bs4
 app = Flask(__name__)
 
+
 @app.route('/')
-def hello_world():
-    response = requests.get('http://www.myvouchercodes.co.uk/boots')
+def index():
+	return "Hello World"
+
+# e.g. http://127.0.0.1:5000/boots
+@app.route('/<string:company>')
+def voucher_codes(company):
+    response = requests.get('http://www.myvouchercodes.co.uk/s?q=' + company)
     soup = bs4.BeautifulSoup(response.text, "html.parser")
     
     codes = []
     for p in soup.findAll('div'):
-	    code = p.find('div',{'class':'Offer-code'})
+	    code = p.find('div', {'class':'Offer-code'})
 	    if code:
 	        if code.text not in codes: 
 		        codes.append(code.text)
