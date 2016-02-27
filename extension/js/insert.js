@@ -18,6 +18,12 @@ function getCurrentElementId() {
 	return document.activeElement.id;
 }
 
+function setVoucherCode(vc) {
+	// Sets the vouchercode in the appropriate text box
+	var codeBox = document.getElementById(getCurrentElementId());
+	codeBox.value = vc;
+}
+
 function mp() {
 	/*
 		1. Receives a message when the context menu INSERT is activated.
@@ -28,7 +34,12 @@ function mp() {
 	*/
 	chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
-			console.log("Element selected: " + document.activeElement.id);
+			
+			//console.log("Element selected: " + document.activeElement.id);
+			if (request.voucherCode) {
+				console.log(request.voucherCode);
+				setVoucherCode(request.voucherCode);
+			}
 			sendResponse({farewell: window.location.hostname});
 		}
 	);

@@ -11,7 +11,16 @@ function onClickInsertHandler(info) {
     
     	chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
 			console.log(response.farewell);
+			
+			chrome.tabs.sendMessage(tabs[0].id, {voucherCode: "VoucherCode"}, function(response) {
+				console.log(response.farewell);
+			
+			});
+			
+			
 		});
+		
+		
     
     });
 	
