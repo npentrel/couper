@@ -8,13 +8,13 @@ function onClickInsertHandler(info) {
     
     // Need to send a message with the voucher code 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    
+
     	chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
 			console.log(response.farewell);
 		});
-    
+
     });
-	
+
 }
 
 chrome.contextMenus.create({
@@ -24,7 +24,6 @@ chrome.contextMenus.create({
 });
 
 function onClickListAllHandler(info) {
-	console.log("All");
     chrome.windows.create({url: 'listall.html', type: 'popup', width: 300, height: 500}, function () {
         chrome.runtime.sendMessage({details: details}, function (response) {
         });

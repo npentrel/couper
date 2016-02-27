@@ -9,8 +9,8 @@ function helloTest() {
 
 	var amazonBox = document.getElementById("gcpromoinput");
 	amazonBox.value="Hello";*/
-	console.log("Hello world");
-	console.log(document.activeElement.id);
+	//console.log("Hello world");
+	//console.log(document.activeElement.id);
 }
 
 function getCurrentElementId() {
