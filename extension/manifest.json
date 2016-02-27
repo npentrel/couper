@@ -1,27 +1,35 @@
 {
-  "manifest_version": 2,
+	"manifest_version": 2,
 
-  "name": "Couper",
-  "description": "An extension for getting the best online voucher codes.",
- 
-  "version": "1.0",
+	"name": "Couper",
+	"description": "An extension for getting the best online voucher codes.",
 
-  "browser_action": {
-    "default_icon": "logo.png",
-    "default_popup": "popup.html"
-  },
-  
-  "content_scripts": [
-  {
-    "matches": [
-      "<all_urls>"
-    ],
-    "js": ["content.js"]
-  }
+	"version": "1.0",
+
+	"browser_action": {
+		"default_icon": "logo.png",
+		"default_popup": "popup.html"
+	},
+
+	"content_scripts": [
+		{
+			"matches": [
+			"http://*/*",
+			"https://*/*"
+		],
+			"js": ["content.js"]
+		}
 	],
-  
-  "permissions": [
-    "activeTab",
-    "https://ajax.googleapis.com/"
-  ]
+	
+	"background": {
+		"scripts": ["background.js"]
+	},
+
+
+	"permissions": [
+		"activeTab", 
+		"<all_urls>",
+		"tabs",
+		"webNavigation"
+	]
 }
