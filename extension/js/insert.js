@@ -20,6 +20,7 @@ function getCurrentElementId() {
 
 function setVoucherCode(vc) {
 	// Sets the vouchercode in the appropriate text box
+	console.log(vc);
 	var codeBox = document.getElementById(getCurrentElementId());
 	codeBox.value = vc;
 }

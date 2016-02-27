@@ -4,15 +4,45 @@ chrome.contextMenus.create({
     'onclick': onClickInsertHandler
 });
 
+
+// Load text with Ajax synchronously: takes path to file and optional MIME type
+function loadTextFileAjaxSync(filePath, mimeType) {
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",filePath,false);
+	if (mimeType != null) {
+		if (xmlhttp.overrideMimeType) {
+			xmlhttp.overrideMimeType(mimeType);
+		}
+	}
+	xmlhttp.send();
+	if (xmlhttp.status==200) {
+		return xmlhttp.responseText;
+	} else {
+		// TODO Throw exception
+		return null;
+	}
+}
+
+
 function onClickInsertHandler(info) {
     
     // Need to send a message with the voucher code 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     
     	chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
-			console.log(response.farewell);
+			//console.log(response.farewell);
 			
-			chrome.tabs.sendMessage(tabs[0].id, {voucherCode: "VoucherCode"}, function(response) {
+			// The returned voucher code
+			var selectedVoucherCode = "";
+			
+			// The URL of the voucher server
+			var voucherURL = "http://61c7b7a6.ngrok.io/" + response.farewell;
+			console.log("Voucher url: " + voucherURL);
+			
+			// Loading all the remote voucher codes.			
+			selectedVoucherCode = loadTextFileAjaxSync(voucherURL, "application/json");
+			
+			chrome.tabs.sendMessage(tabs[0].id, {voucherCode: selectedVoucherCode}, function(response) {
 				console.log(response.farewell);
 			
 			});
