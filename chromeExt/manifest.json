@@ -1,13 +1,13 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 2,
 
-  "name": "GetCouper",
+  "name": "Couper",
   "description": "A browser extension for getting the best voucher codes whilst shopping online.",
-  "default_locale": "en",
+ 
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "logo48.png"
   },
   
   "permissions": [
