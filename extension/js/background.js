@@ -7,6 +7,13 @@ chrome.contextMenus.create({
 function onClickInsertHandler(info) {
     
     // Need to send a message with the voucher code 
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    
+    	chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
+			console.log(response.farewell);
+		});
+    
+    });
 	
 }
 

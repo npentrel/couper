@@ -1,4 +1,5 @@
-setInterval(helloTest, 5000);
+mp();
+// setInterval(helloTest, 5000);
 
 function helloTest() {
 	/*var elems = document.getElementsByTagName('input');
@@ -15,4 +16,13 @@ function helloTest() {
 function getCurrentElementId() {
 	// Returns the ID of the element in focus
 	return document.activeElement.id;
+}
+
+function mp() {
+	chrome.runtime.onMessage.addListener(
+		function(request, sender, sendResponse) {
+		
+			console.log("Element selected: " + document.activeElement.id);
+		}
+	);
 }
