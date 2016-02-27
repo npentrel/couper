@@ -1,10 +1,21 @@
 chrome.contextMenus.create({
-  'title': 'Find Best Coupon!',
+  'title': 'Insert Best Coupon',
   'contexts': ['link'],
-  'onclick': onClickHandler
+  'onclick': onClickInsertHandler
 });
 
-function onClickHandler(info) {
+function onClickInsertHandler(info) {
+
+}
+
+
+chrome.contextMenus.create({
+  'title': 'Find All Coupons',
+  'contexts': ['link'],
+  'onclick': onClickListAllHandler
+});
+
+function onClickListAllHandler(info) {
   var details = {};
 
   details.title = info.selectionText;
@@ -14,7 +25,7 @@ function onClickHandler(info) {
   details.pageUrl = info.pageUrl;
   details.text = info.selectionText;
 
-  chrome.windows.create({ url: 'window.html', type: 'popup', width: 300, height: 300 }, function() {
+  chrome.windows.create({ url: 'listall.html', type: 'popup', width: 300, height: 500 }, function() {
     chrome.runtime.sendMessage({ details: details }, function(response) {});
   });
 }
