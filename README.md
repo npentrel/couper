@@ -1,6 +1,9 @@
 # couper
 Coupon magic.
 
+Chrome extention
+================
+https://developer.chrome.com/extensions/getstarted#unpacked
 
 backend
 =======
