@@ -1,6 +1,6 @@
 chrome.contextMenus.create({
     'title': 'Insert Best Coupon',
-    'contexts': ['link'],
+    'contexts': ['editable'],
     'onclick': onClickInsertHandler
 });
 
@@ -10,7 +10,7 @@ function onClickInsertHandler(info) {
 
 chrome.contextMenus.create({
     'title': 'Find All Coupons',
-    'contexts': ['link'],
+    'contexts': ['link', 'editable'],
     'onclick': onClickListAllHandler
 });
 
