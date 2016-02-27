@@ -6,6 +6,6 @@ function helloTest() {
 	 console.log(elems[i].id);
 	}
 	
-	var amazonBox = document.getElementById("twotabsearchtextbox");
+	var amazonBox = document.getElementById("gcpromoinput");
 	amazonBox.value="Hello";
 }
