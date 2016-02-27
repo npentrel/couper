@@ -19,6 +19,13 @@ function getCurrentElementId() {
 }
 
 function mp() {
+	/*
+		1. Receives a message when the context menu INSERT is activated.
+		2. Responds with the hostname of the webpage where the context menu was activated.
+		3. Background JS requests the voucher via GET request.
+		4. mp() Receives the voucher code.
+		5. mp Sets the voucher code in the text box. 
+	*/
 	chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
 			console.log("Element selected: " + document.activeElement.id);
