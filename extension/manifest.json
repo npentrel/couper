@@ -2,12 +2,12 @@
   "manifest_version": 2,
 
   "name": "Couper",
-  "description": "A browser extension for getting the best voucher codes whilst shopping online.",
+  "description": "An extension for getting the best online voucher codes.",
  
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "logo48.png",
+    "default_icon": "logo.png",
     "default_popup": "popup.html"
   },
   
