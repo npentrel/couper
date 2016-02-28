@@ -20,7 +20,7 @@ function getCurrentElementId() {
 
 function setVoucherCode(vc) {
 	// Sets the vouchercode in the appropriate text box
-	console.log(vc);
+	//console.log(vc);
 	var codeBox = document.getElementById(getCurrentElementId());
 	codeBox.value = vc;
 }
@@ -39,7 +39,7 @@ function mp() {
 		
 			//console.log("Element selected: " + document.activeElement.id);
 			if (request.voucherCode) {
-				console.log(request.voucherCode);
+				//console.log(request.voucherCode);
 				setVoucherCode(request.voucherCode);
 			}
 			sendResponse({farewell: window.location.hostname});

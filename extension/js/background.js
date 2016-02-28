@@ -37,7 +37,7 @@ function onClickInsertHandler(info) {
 			
 			// The URL of the voucher server
 			var voucherURL = "http://localhost:5000/" + response.farewell;
-			console.log("Voucher url: " + voucherURL);
+			//console.log("Voucher url: " + voucherURL);
 			
 			// Loading all the remote voucher codes.			
 			var jsonString = loadTextFileAjaxSync(voucherURL, "application/json");
@@ -52,7 +52,7 @@ function onClickInsertHandler(info) {
 			//selectedVoucherCode = jsonObject.NEWSTYLE16;
 			
 			chrome.tabs.sendMessage(tabs[0].id, {voucherCode: selectedVoucherCode}, function(response) {
-				console.log(response.farewell);
+				//console.log(response.farewell);
 			
 			});
 			
@@ -81,7 +81,7 @@ function onClickListAllHandler(info) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     
     	chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
-			console.log("Response: " + response.farewell);
+			//console.log("Response: " + response.farewell);
 			
 			// The returned vendor
 			vendor = response.farewell;
