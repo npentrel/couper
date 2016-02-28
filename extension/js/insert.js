@@ -1,5 +1,5 @@
-mp();
-// setInterval(helloTest, 5000);
+
+setInterval(mp, 1000);
 
 function helloTest() {
 	/*var elems = document.getElementsByTagName('input');
@@ -33,15 +33,10 @@ function mp() {
 		4. mp() Receives the voucher code.
 		5. mp Sets the voucher code in the text box. 
 	*/
+	
 	chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
-			
-			sendResponse({currentVendor: window.location.hostname});
-			if (request.getVendor) {
-				console.log("Vendor request: " + window.location.hostname);
-				
-			}
-			
+		
 			//console.log("Element selected: " + document.activeElement.id);
 			if (request.voucherCode) {
 				console.log(request.voucherCode);
@@ -50,4 +45,5 @@ function mp() {
 			sendResponse({farewell: window.location.hostname});
 		}
 	);
+	
 }
