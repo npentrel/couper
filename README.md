@@ -1,7 +1,7 @@
 # couper
 The best online voucher codes!
 
-Chrome extention
+Chrome extension
 ================
 https://developer.chrome.com/extensions/getstarted#unpacked
 
