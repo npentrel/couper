@@ -40,12 +40,15 @@ def hotukdeals(company):
     soup = bs4.BeautifulSoup(response.text, "html.parser")
     codes = {}
     for p in soup.findAll('div'):
-        title = p.find('h2', {'class':'thread-title-text voucherbox-thread-title-text hd--inline'})
-        code = p.find('input', {'class':'voucherReveal-peel-bottom-code'})
-        if code:
-            if title:
-                if code.attrs["value"] not in codes:
-                    codes[code.attrs["value"]] = title.text
+        expired = p.find('header', {'class':'thread-title'})
+        if expired:
+            if "Expired" not in expired.text:
+                title = p.find('h2', {'class':'thread-title-text voucherbox-thread-title-text hd--inline'})
+                code = p.find('input', {'class':'voucherReveal-peel-bottom-code'})
+                if code:
+                    if title:
+                        if code.attrs["value"] not in codes:
+                            codes[code.attrs["value"]] = expired.text
 
     # for c in codes:
     #     print (c, codes[c])
