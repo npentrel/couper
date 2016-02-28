@@ -81,6 +81,25 @@ def allvouchers(company):
             if "see " not in c:
                 if "See" not in c:
                     codesall[c] = codesother[c]
+
+
+    if "dominos" in company:
+        reordered = {}
+        # for p in soup.findAll('div'):
+        #     location = p.find('span')
+        #     if location:
+        #         print (location)
+        location = "Oxford"
+        for c in codesall:
+            if ":" not in codesall[c]:
+                reordered[c] = codesall[c]
+        for c in codesall:
+            if location in codesall[c]:
+                reordered[c] = codesall[c]
+        out = json.dumps(reordered, ensure_ascii=False)
+        print (out)
+        return out
+
     print("")
 
     print ("all codes: ", codesall)
@@ -89,6 +108,7 @@ def allvouchers(company):
     output = json.dumps(codesall, ensure_ascii=False)
 
     print (output)
+
 
     return output
 
