@@ -73,8 +73,8 @@ chrome.contextMenus.create({
 
 function onClickListAllHandler(info) {
 	console.log("All");
-    chrome.windows.create({url: 'listall.html', type: 'popup', width: 300, height: 500}, function () {
-        chrome.runtime.sendMessage({details: details}, function (response) {
-        });
+    chrome.windows.create({url: 'listall.html?v=www.boots.com', type: 'popup', width: 300, height: 500}, function () {
+        /*chrome.runtime.sendMessage({details: details}, function (response) {
+        });*/
     });
 }

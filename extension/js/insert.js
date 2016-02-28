@@ -36,6 +36,12 @@ function mp() {
 	chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
 			
+			sendResponse({currentVendor: window.location.hostname});
+			if (request.getVendor) {
+				console.log("Vendor request: " + window.location.hostname);
+				
+			}
+			
 			//console.log("Element selected: " + document.activeElement.id);
 			if (request.voucherCode) {
 				console.log(request.voucherCode);
