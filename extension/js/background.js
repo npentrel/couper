@@ -77,32 +77,23 @@ function onClickListAllHandler(info) {
 	// The name of the seller. EG: Amazon / boots etc
 	var vendor = "www.amazon.co.uk";
 	
-	
-	
-	
-	
 	 // Need to send a message with the voucher code 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     
     	chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
 			console.log("Response: " + response.farewell);
 			
-			// The returned voucher code
+			// The returned vendor
 			vendor = response.farewell;
 			
-			chrome.windows.create({url: 'listall.html?v=' + vendor, type: 'popup', width: 300, height: 500}, function () {
+			chrome.windows.create({url: 'listall.html?v=' + vendor, type: 'popup', width: 600, height: 500}, function () {
 				/*chrome.runtime.sendMessage({details: details}, function (response) {
 				});*/
 			});
 			
 		});
-		
-		
-    
+	
     });
-	
-	
-	
 	
     
 }
