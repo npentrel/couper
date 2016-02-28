@@ -36,7 +36,7 @@ function onClickInsertHandler(info) {
 			var selectedVoucherCode = "";
 			
 			// The URL of the voucher server
-			var voucherURL = "http://61c7b7a6.ngrok.io/" + response.farewell;
+			var voucherURL = "http://localhost:5000/" + response.farewell;
 			console.log("Voucher url: " + voucherURL);
 			
 			// Loading all the remote voucher codes.			

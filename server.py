@@ -5,7 +5,7 @@ from html.parser import HTMLParser
 import bs4
 import json
 import requests
-from keys import NESSIE_CUSTOMER_ID, NESSIE_KEY 
+#from keys import NESSIE_CUSTOMER_ID, NESSIE_KEY 
 app = Flask(__name__)
 
 
@@ -90,36 +90,36 @@ def allvouchers(company):
     return output
 
 
-@app.route('/nessie')
-def nessie():    
-    customerId = NESSIE_CUSTOMER_ID
-    apiKey = NESSIE_KEY
-
-    url = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId,apiKey)
-    print (url)
-    payload = {
-      "type": "Savings",
-      "nickname": "test",
-      "rewards": 10000,
-      "balance": 10000, 
-    }
-    # Create a Savings Account
-    response = requests.post( 
-        url, 
-        data=json.dumps(payload),
-        headers={'content-type':'application/json'},
-        )
-
-    if response.status_code == 201:
-        print('account created')
-
-    url2 = 'http://api.reimaginebanking.com/accounts/{}?key={}'.format(customerId,apiKey)
-    print (url2)
-
-    res = requests.get(url2)
-    print (res.text)
-
-    return "hi"
+# @app.route('/nessie')
+# def nessie():    
+#     customerId = NESSIE_CUSTOMER_ID
+#     apiKey = NESSIE_KEY
+# 
+#     url = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId,apiKey)
+#     print (url)
+#     payload = {
+#       "type": "Savings",
+#       "nickname": "test",
+#       "rewards": 10000,
+#       "balance": 10000, 
+#     }
+#     # Create a Savings Account
+#     response = requests.post( 
+#         url, 
+#         data=json.dumps(payload),
+#         headers={'content-type':'application/json'},
+#         )
+# 
+#     if response.status_code == 201:
+#         print('account created')
+# 
+#     url2 = 'http://api.reimaginebanking.com/accounts/{}?key={}'.format(customerId,apiKey)
+#     print (url2)
+# 
+#     res = requests.get(url2)
+#     print (res.text)
+# 
+#     return "hi"
 
 if __name__ == '__main__':
     app.run()
