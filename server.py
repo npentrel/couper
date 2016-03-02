@@ -1,7 +1,7 @@
 from flask import Flask
 import requests
 import re
-from html.parser import HTMLParser
+import HTMLParser
 import bs4
 import json
 import requests
@@ -145,4 +145,4 @@ def nessie():
     return res.text
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0")
