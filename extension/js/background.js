@@ -36,7 +36,7 @@ function onClickInsertHandler(info) {
 			var selectedVoucherCode = "";
 			
 			// The URL of the voucher server
-			var voucherURL = "http://localhost:5000/" + response.farewell;
+			var voucherURL = "http://getcouper.com:5000/" + response.farewell;
 			//console.log("Voucher url: " + voucherURL);
 			
 			// Loading all the remote voucher codes.			

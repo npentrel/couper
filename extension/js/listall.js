@@ -24,7 +24,7 @@ function getVendor() {
 function displayAllCodes(vendor) {
 	// Vendor is the seller like amazon / boots
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "http://127.0.0.1:5000/" + vendor, false);
+	xhr.open("GET", "http://getcouper.com:5000/" + vendor, false);
 	xhr.send();
 	var result = xhr.responseText;
 
