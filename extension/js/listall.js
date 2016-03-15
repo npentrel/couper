@@ -30,12 +30,19 @@ function displayAllCodes(vendor) {
 
 	var json = JSON.parse(result);
 
+	//TODO: Fix XSS vulnerability.
 	$(document).ready(function () {
+		// Index variable for adding an ID to each of the voucher code <td> cells.
+		var couponIndex = 0;
 		var tr;
 		for (var a in json) {
 			tr = $('<tr/>');
-			tr.append("<td>" + a + "</td>");
+			tr.append("<td id='c" + couponIndex + "'>" + a + "</td>");
 			tr.append("<td>" + json[a] + "</td>");
+			//tr.append("<td> <button class='btn'  data-clipboard-text='" + a + "' data-clipboard-target='#c" + couponIndex + "'><img class='buttClipboard' src='img/clippy.svg' alt='Copy' ></button></td>");
+			tr.append("<td> <button class='btn'  data-clipboard-text='" + a + "'><img class='buttClipboard' src='img/clippy.svg' alt='Copy' ></button></td>")
+			couponIndex++;
+
 			$('table').append(tr);
 		}
 	});

@@ -17,7 +17,6 @@ function loadTextFileAjaxSync(filePath, mimeType) {
 	if (xmlhttp.status==200) {
 		return xmlhttp.responseText;
 	} else {
-		// TODO Throw exception
 		return null;
 	}
 }
@@ -65,7 +64,7 @@ function onClickInsertHandler(info) {
 
 chrome.contextMenus.create({
     'title': 'Find All Coupons',
-    'contexts': ['link', 'editable'],
+    'contexts': ['all'],
     'onclick': onClickListAllHandler
 });
 
