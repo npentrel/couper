@@ -21,3 +21,7 @@ pip install beautifulsoup4
 ```
 python server.py
 ```
+
+# Contribution
+Please do not contribute directly to the master or develop branch. 
+For fixing any issue or adding new features, create a branch from develop. After that, create a new pull request from within your branch and the base as the develop branch. This will allow for code review before merging. 
