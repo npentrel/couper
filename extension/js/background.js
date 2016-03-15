@@ -4,7 +4,6 @@ chrome.contextMenus.create({
     'onclick': onClickInsertHandler
 });
 
-
 // Load text with Ajax synchronously: takes path to file and optional MIME type
 function loadTextFileAjaxSync(filePath, mimeType) {
 	var xmlhttp=new XMLHttpRequest();
@@ -22,7 +21,6 @@ function loadTextFileAjaxSync(filePath, mimeType) {
 		return null;
 	}
 }
-
 
 function onClickInsertHandler(info) {
     
