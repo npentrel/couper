@@ -1,9 +1,33 @@
 console.log("Listall.js is called.");
-//console.log(getParameterByName("v", window.location.href));
 
-// Getting the vendor
-displayAllCodes(getVendor());
-// Calling the function to display all the voucher codes.
+// Run the initialisation script
+init();
+
+function init() {
+	// Getting the vendor and showing the voucher codes
+	displayAllCodes(getVendor());
+
+	// Initialising clipboard JS
+	initClipboard();
+}
+
+function initClipboard() {
+	// Declaring as global variable
+	clipboard = new Clipboard('.btn');
+}
+clipboard.on('success', function(e) {
+	console.info('Action:', e.action);
+	console.info('Text:', e.text);
+	console.info('Trigger:', e.trigger);
+
+	//TODO: Add a notification if the code has been copied successfully
+
+	e.clearSelection();
+});
+clipboard.on('error', function(e) {
+	console.error('Action:', e.action);
+	console.error('Trigger:', e.trigger);
+});
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -39,15 +63,10 @@ function displayAllCodes(vendor) {
 			tr = $('<tr/>');
 			tr.append("<td id='c" + couponIndex + "'>" + a + "</td>");
 			tr.append("<td>" + json[a] + "</td>");
-			//tr.append("<td> <button class='btn'  data-clipboard-text='" + a + "' data-clipboard-target='#c" + couponIndex + "'><img class='buttClipboard' src='img/clippy.svg' alt='Copy' ></button></td>");
-			tr.append("<td> <button class='btn'  data-clipboard-text='" + a + "'><img class='buttClipboard' src='img/clippy.svg' alt='Copy' ></button></td>")
+			tr.append("<td> <button class='btn tooltipped'  data-clipboard-text='" + a + "'><img class='buttClipboard' src='img/clippy.svg' alt='Copy' ></button></td>")
 			couponIndex++;
 
 			$('table').append(tr);
 		}
 	});
 }
-
-//var text = document.createTextNode(result);
-//var child = document.getElementById('table');
-//child.parentNode.insertBefore(text, child);
