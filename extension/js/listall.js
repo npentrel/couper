@@ -64,6 +64,7 @@ function displayAllCodes(vendor) {
 			tr.append("<td id='c" + couponIndex + "'>" + a + "</td>");
 			tr.append("<td>" + json[a] + "</td>");
 			tr.append("<td> <button class='btn tooltipped'  data-clipboard-text='" + a + "'><img class='buttClipboard' src='img/clippy.svg' alt='Copy' ></button></td>")
+
 			couponIndex++;
 
 			$('table').append(tr);
