@@ -2,3 +2,17 @@
     height: 12px;
     width: 12px;
 }
+
+.btn {
+    margin-left: 8px;
+}
+
+#copyAlert {
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    text-align: center;
+}
+#copyAlertColumn {
+    width: 70px;
+}

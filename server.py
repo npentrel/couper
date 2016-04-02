@@ -5,28 +5,30 @@ import HTMLParser
 import bs4
 import json
 import requests
-from keys import NESSIE_CUSTOMER_ID, NESSIE_KEY 
+from keys import NESSIE_CUSTOMER_ID, NESSIE_KEY
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-	return "Hello World"
+    return "Hello World"
+
 
 # e.g. http://127.0.0.1:5000/myvouchercodes/boots
 @app.route('/myvouchercodes/<string:company>')
 def my_voucher_codes(company):
     response = requests.get('http://www.myvouchercodes.co.uk/s?q=' + company)
     soup = bs4.BeautifulSoup(response.text, "html.parser")
-    
+
     codes = {}
     for p in soup.findAll('div'):
-        code = p.find('div', {'class':'Offer-code'})
-        title = p.find('h3', {'class':'Offer-title'})
+        code = p.find('div', {'class': 'Offer-code'})
+        title = p.find('h3', {'class': 'Offer-title'})
         if code:
             if title:
                 codes[code.text] = title.text
-    
+
     # for c in codes:
     #     print (c, codes[c])
 
@@ -40,11 +42,11 @@ def hotukdeals(company):
     soup = bs4.BeautifulSoup(response.text, "html.parser")
     codes = {}
     for p in soup.findAll('div'):
-        expired = p.find('header', {'class':'thread-title'})
+        expired = p.find('header', {'class': 'thread-title'})
         if expired:
             if "Expired" not in expired.text:
-                title = p.find('h2', {'class':'thread-title-text voucherbox-thread-title-text hd--inline'})
-                code = p.find('input', {'class':'voucherReveal-peel-bottom-code'})
+                title = p.find('h2', {'class': 'thread-title-text voucherbox-thread-title-text hd--inline'})
+                code = p.find('input', {'class': 'voucherReveal-peel-bottom-code'})
                 if code:
                     if title:
                         if code.attrs["value"] not in codes:
@@ -82,7 +84,6 @@ def allvouchers(company):
                 if "See" not in c:
                     codesall[c] = codesother[c]
 
-
     if "dominos" in company:
         reordered = {}
         # for p in soup.findAll('div'):
@@ -109,40 +110,40 @@ def allvouchers(company):
 
     print (output)
 
-
     return output
 
 
 @app.route('/nessie')
-def nessie():    
+def nessie():
     customerId = NESSIE_CUSTOMER_ID
     apiKey = NESSIE_KEY
 
-    url = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId,apiKey)
+    url = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId, apiKey)
     print (url)
     payload = {
-      "type": "Savings",
-      "nickname": "test",
-      "rewards": 10000,
-      "balance": 10000, 
+        "type": "Savings",
+        "nickname": "test",
+        "rewards": 10000,
+        "balance": 10000,
     }
     # Create a Savings Account
-    response = requests.post( 
-        url, 
+    response = requests.post(
+        url,
         data=json.dumps(payload),
-        headers={'content-type':'application/json'},
-        )
+        headers={'content-type': 'application/json'},
+    )
 
     if response.status_code == 201:
         print('account created')
 
-    url2 = 'http://api.reimaginebanking.com/accounts/{}?key={}'.format(customerId,apiKey)
+    url2 = 'http://api.reimaginebanking.com/accounts/{}?key={}'.format(customerId, apiKey)
     print (url2)
 
     res = requests.get(url2)
     print (res.text)
 
     return res.text
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

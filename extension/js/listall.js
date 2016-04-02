@@ -9,6 +9,8 @@ function init() {
 
 	// Initialising clipboard JS
 	initClipboard();
+
+	$("#copyAlert").hide();
 }
 
 function initClipboard() {
@@ -16,11 +18,13 @@ function initClipboard() {
 	clipboard = new Clipboard('.btn');
 }
 clipboard.on('success', function(e) {
+	console.log("Copied to clipboard!");
 	console.info('Action:', e.action);
 	console.info('Text:', e.text);
 	console.info('Trigger:', e.trigger);
 
-	//TODO: Add a notification if the code has been copied successfully
+	// Display feedback to the user that the code has been copied to the clipboard.
+	copyAlert();
 
 	e.clearSelection();
 });
@@ -28,6 +32,9 @@ clipboard.on('error', function(e) {
 	console.error('Action:', e.action);
 	console.error('Trigger:', e.trigger);
 });
+function copyAlert() {
+	$('#copyAlert').show(0).delay(1000).fadeOut(500);
+}
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -48,6 +55,7 @@ function getVendor() {
 function displayAllCodes(vendor) {
 	// Vendor is the seller like amazon / boots
 	var xhr = new XMLHttpRequest();
+	console.log("Vendor: " + vendor);
 	xhr.open("GET", "http://getcouper.com:5000/" + vendor, false);
 	xhr.send();
 	var result = xhr.responseText;
